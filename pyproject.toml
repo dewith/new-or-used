@@ -35,3 +35,10 @@ override_SS05 = [  # allow docstrings to start with these words
     '^Assess ',
     '^Access ',
 ]
+
+
+[tool.pylint.MASTER]
+ignore-patterns = 'test_.*?py'
+
+[tool.pylint.format]
+max-line-length = 88

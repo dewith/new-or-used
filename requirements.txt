@@ -1,6 +1,8 @@
 # Code Quality
 pre-commit
 pylint
+ruff
+pytest
 
 # Data Analysis
 numpy

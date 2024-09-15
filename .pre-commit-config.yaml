@@ -16,20 +16,20 @@ repos:
       - id: nbstripout
 
   - repo: https://github.com/numpy/numpydoc
-    rev: v1.7.0
+    rev: v1.8.0
     hooks:
       - id: numpydoc-validation
         exclude: (tests|docs)/.*
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.5
+    rev: v0.6.5
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix, --show-fixes]
       - id: ruff-format
 
   - repo: https://github.com/pycqa/pylint
-    rev: v3.2.2
+    rev: v3.2.7
     hooks:
       - id: pylint
         args: [--disable=import-error]

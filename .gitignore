@@ -1,7 +1,6 @@
 _docs/
 
 *.bak
-.gitattributes
 .last_checked
 .gitconfig
 *.bak

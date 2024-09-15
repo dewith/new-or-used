@@ -40,5 +40,6 @@ override_SS05 = [  # allow docstrings to start with these words
 [tool.pylint.MASTER]
 ignore-patterns = 'test_.*?py'
 
-[tool.pylint.format]
+
+[tool.pylint.MAIN]
 max-line-length = 88

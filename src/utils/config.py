@@ -8,7 +8,8 @@ import yaml
 def check_cwd() -> str:
     """
     Check the current working directory and determines the appropriate prefix based
-    on the directory structure. The prefix is used to construct relative paths in the code.
+    on the directory structure. The prefix is used to construct relative
+    paths in the code.
 
     Returns
     -------

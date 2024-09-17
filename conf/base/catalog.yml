@@ -5,30 +5,14 @@ layers:
   models: "data/04_models/"
   outputs: "data/05_outputs/"
 
-raw_spotify:
+raw_items:
   layer: raw
-  path: spotify_dataset.csv
+  path: MLA_100k_checked_v3.jsonlines
 
-master_spotify:
-  layer: processed
-  path: spotify_master.parquet
+raw_items_train:
+  layer: raw
+  path: MLA_100k_checked_v3_train.jsonlines
 
-model_input_full:
-  layer: inputs
-  path: model_input_full.parquet
-
-train:
-  layer: inputs
-  path: train.parquet
-
-validation:
-  layer: inputs
-  path: validation.parquet
-
-test:
-  layer: inputs
-  path: test.parquet
-
-track2vec_model:
-  layer: models
-  path: track2vec.model
+raw_items_test:
+  layer: raw
+  path: MLA_100k_checked_v3_test.jsonlines

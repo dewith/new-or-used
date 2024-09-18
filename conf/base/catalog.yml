@@ -16,3 +16,7 @@ raw_items_train:
 raw_items_test:
   layer: raw
   path: MLA_100k_checked_v3_test.jsonlines
+
+clean_items_train:
+  layer: processed
+  path: items_train_clean.csv

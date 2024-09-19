@@ -20,3 +20,11 @@ raw_items_test:
 clean_items_train:
   layer: processed
   path: items_train_clean.csv
+
+clean_items_test:
+  layer: processed
+  path: items_test_clean.csv
+
+preprocessor:
+  layer: models
+  path: preprocessor.pkl

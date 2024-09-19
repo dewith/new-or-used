@@ -29,7 +29,7 @@ def get_stopwords(set_name='spanish') -> set:
         return set(stopwords.words(set_name))
 
 
-def normalize_text(text: str, stops: set = None) -> str:
+def normalize_text(text: str, stops: set = None, spaces_unders: bool = False) -> str:
     """
     Normalize text by converting to lowercase, removing accents, punctuation,
     special characters, extra whitespace, and stopwords.
@@ -40,6 +40,8 @@ def normalize_text(text: str, stops: set = None) -> str:
         The text to normalize.
     stops : set, optional
         The set of stopwords to remove, by default None.
+    spaces_unders : bool, optional
+        Whether to replace spaces with underscores, by default False.
 
     Returns
     -------
@@ -62,4 +64,6 @@ def normalize_text(text: str, stops: set = None) -> str:
     # Remove stopwords
     if stops:
         text = ' '.join([word for word in text.split() if word not in stops])
+    if spaces_unders:
+        text = text.replace(' ', '_')
     return text

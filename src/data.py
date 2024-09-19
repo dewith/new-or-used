@@ -17,6 +17,7 @@ def build_dataset():
 """
 
 import json
+import pickle
 
 import numpy as np
 import pandas as pd
@@ -92,7 +93,7 @@ class Preprocessor:
             raise ValueError('Preprocessor not fitted')
         df = df.copy()
 
-        bprint('Processing dict columns', level=3)
+        bprint('Processing dict columns', level=4)
         # Drop location information, it won't be used because high cardinality
         df.drop(columns=['seller_address'], inplace=True)
 
@@ -109,7 +110,7 @@ class Preprocessor:
         ]
         df = pd.concat([df.drop('shipping', axis=1), shipping_df], axis=1)
 
-        bprint('Processing list columns', level=3)
+        bprint('Processing list columns', level=4)
         # Make it a string instead of a list
         df['sub_status'] = df['sub_status'].apply(lambda x: x[0] if x else np.nan)
 
@@ -169,7 +170,7 @@ class Preprocessor:
         # Drop shipping_methods since it is empty
         df.drop(columns=['shipping_methods'], inplace=True)
 
-        bprint('Processing categorical columns', level=3)
+        bprint('Processing categorical columns', level=4)
         # Not useful columns from the beggining
         df.drop(self.not_useful_columns, axis=1, inplace=True)
 
@@ -186,7 +187,7 @@ class Preprocessor:
         df['title_len'] = df.title_norm.str.len()
         df.drop('title', axis=1, inplace=True)
 
-        bprint('Processing numerical columns', level=3)
+        bprint('Processing numerical columns', level=4)
         # Drop the seller ID since it is not relevant for the model
         df.drop('seller_id', axis=1, inplace=True)
 
@@ -210,7 +211,7 @@ class Preprocessor:
         # And let's drop original price too, because is null most of the time.
         df.drop(['base_price', 'original_price'], axis=1, inplace=True)
 
-        bprint('Processing boolean columns', level=3)
+        bprint('Processing boolean columns', level=4)
         # Not accepting Mercado Pago is a little bit more common in used items.
         df.accepts_mercadopago = df.accepts_mercadopago.astype(int)
 
@@ -275,9 +276,11 @@ class Preprocessor:
         new_attributes = {}
         for attribute in attributes:
             attribute_name = 'attr_' + normalize_text(
-                attribute['name'], stops=STOPWORDS
+                attribute['name'], stops=STOPWORDS, spaces_unders=True
             )
-            value = normalize_text(attribute['value_name'], stops=STOPWORDS)
+            value = normalize_text(
+                attribute['value_name'], stops=STOPWORDS, spaces_unders=True
+            )
             if attribute_name in self.attributes_to_keep:
                 new_attributes[f'{attribute_name}'] = value
         return new_attributes
@@ -329,8 +332,12 @@ class Preprocessor:
         for row in all_attributes:
             for attribute in row:
                 if attribute:
-                    attribute_name = normalize_text(attribute['name'], stops=STOPWORDS)
-                    value = normalize_text(attribute['value_name'], stops=STOPWORDS)
+                    attribute_name = normalize_text(
+                        attribute['name'], stops=STOPWORDS, spaces_unders=True
+                    )
+                    value = normalize_text(
+                        attribute['value_name'], stops=STOPWORDS, spaces_unders=True
+                    )
                     attributes.append({'attribute': attribute_name, 'value': value})
 
         attributes_df = pd.DataFrame(attributes)
@@ -343,8 +350,12 @@ class Preprocessor:
             """Clean and consolidate attributes."""
             new_attributes = {}
             for attribute in row_attributes:
-                attribute_name = normalize_text(attribute['name'], stops=STOPWORDS)
-                value = normalize_text(attribute['value_name'], stops=STOPWORDS)
+                attribute_name = normalize_text(
+                    attribute['name'], stops=STOPWORDS, spaces_unders=True
+                )
+                value = normalize_text(
+                    attribute['value_name'], stops=STOPWORDS, spaces_unders=True
+                )
                 if attribute_name in common_attributes:
                     new_attributes[f'attr_{attribute_name}'] = value
             return new_attributes
@@ -441,11 +452,11 @@ def preprocess_dataset():
         bprint(f'Test set shape: {test_df.shape}', level=3)
 
     # Label preprocessing
-    bprint('Mapping target label', level=2)
-    label_mapping = {'new': 0, 'used': 1}
+    label_mapping = {'used': 0, 'new': 1}
+    bprint('Mapping target label to', label_mapping, level=2)
     train_df[TARGET_COLUMN] = train_df[TARGET_COLUMN].map(label_mapping)
     test_df[TARGET_COLUMN] = test_df[TARGET_COLUMN].map(label_mapping)
-    label_proportion = train_df[TARGET_COLUMN].value_counts(normalize=True).round(2)
+    label_proportion = train_df[TARGET_COLUMN].value_counts(normalize=True).round(3)
     bprint('Proportion of each class:', label_proportion.to_dict(), level=3)
 
     # Fitting preprocessor
@@ -457,13 +468,21 @@ def preprocess_dataset():
 
     # Transform the data
     bprint('Transforming data', level=2)
+    bprint('Train set', level=3)
     train_df = preprocessor.transform(train_df)
+    bprint('Test set', level=3)
     test_df = preprocessor.transform(test_df)
 
     # Save the preprocessed data
     bprint('Saving preprocessed data', level=2)
     train_df.to_csv(clean_train_path, index=False)
     test_df.to_csv(clean_test_path, index=False)
+
+    # Save the preprocessor
+    bprint('Writing preprocessor class with pickle', level=2)
+    with open(get_dataset_path('preprocessor'), 'wb') as f:
+        pickle.dump(preprocessor, f)
+
     bprint('Done', level=2)
 
 

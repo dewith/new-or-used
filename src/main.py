@@ -6,15 +6,15 @@ from src.model import train_model
 from src.utils.logging import bprint
 
 if __name__ == '__main__':
-    bprint('DATA PREPROCESSING 💽', level=0)
+    bprint('DATA PREPROCESSING 💽', level=1)
     split_dataset(-10000)
     preprocess_dataset()
 
-    bprint('ML MODELING 🤖', level=0)
+    bprint('ML MODELING 🤖', level=1)
     train_model(cv=5)
     train_model()
 
-    bprint('EVALUATION 📊', level=0)
+    bprint('EVALUATION ON TEST 📊', level=1)
     evaluate_test()
 
-    bprint('DONE 🎉', level=0)
+    bprint('DONE ✅', level=1)

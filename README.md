@@ -47,7 +47,7 @@ $ python -m src.main
 You should see the following output:
 
 ```bash
-DATA PREPROCESSING 💽
+| DATA PREPROCESSING 💽
 | Train-test splitting
 |     Reading data from data/01_raw/MLA_100k_checked_v3.jsonlines
 |         Dataset contains 100,000 items
@@ -79,7 +79,7 @@ DATA PREPROCESSING 💽
 |     Saving preprocessed data
 |     Writing preprocessor class with pickle
 |     Done
-ML MODELING 🤖
+| ML MODELING 🤖
 | Training model with cv = 5
 |     Loading data
 |     Building preprocessors
@@ -109,7 +109,7 @@ ML MODELING 🤖
 |     Building pipeline
 |     Training the model
 |     Saving the model
-EVALUATION 📊
+| EVALUATION ON TEST 📊
 |     Loading data
 |     Loading model
 |     Making predictions
@@ -130,17 +130,5 @@ EVALUATION 📊
 |     Confusion matrix:
 |         [[0.887 0.113]
 |          [0.125 0.875]]
-DONE 🎉
+| DONE 🎉
 ```
-
-## Project overview
-
-### Data
-
-#### Analysis
-
-### Model
-
-### Pipeline
-
-## Conclusion

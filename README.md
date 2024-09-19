@@ -87,10 +87,10 @@ You should see the following output:
 |     Performing cross-validation score
 |     Performing cross-validation predict:
 |         Cross-validation metrics:
-|             test_accuracy    0.8803 ± 0.0010
-|             test_precision   0.8992 ± 0.0030
-|             test_recall      0.8752 ± 0.0034
-|             test_f1_score    0.8871 ± 0.0010
+|             test_accuracy    0.8798 ± 0.0027
+|             test_precision   0.8991 ± 0.0030
+|             test_recall      0.8745 ± 0.0049
+|             test_f1_score    0.8866 ± 0.0027
 |         Classification report:
 |                           precision    recall  f1-score   support
 |
@@ -109,26 +109,27 @@ You should see the following output:
 |     Building pipeline
 |     Training the model
 |     Saving the model
-| EVALUATION ON TEST 📊
+| EVALUATION 📊
+| Evaluation on test set
 |     Loading data
 |     Loading model
 |     Making predictions
 |     Metrics:
-|         accuracy     0.8801
-|         precision    0.9007
-|         recall       0.8746
-|         f1_score     0.8875
+|         accuracy     0.8807
+|         precision    0.9002
+|         recall       0.8764
+|         f1_score     0.8882
 |     Classification report:
 |                       precision    recall  f1-score   support
 |
 |                    0       0.86      0.89      0.87      4594
-|                    1       0.90      0.87      0.89      5406
+|                    1       0.90      0.88      0.89      5406
 |
 |             accuracy                           0.88     10000
 |            macro avg       0.88      0.88      0.88     10000
 |         weighted avg       0.88      0.88      0.88     10000
 |     Confusion matrix:
-|         [[0.887 0.113]
-|          [0.125 0.875]]
-| DONE 🎉
+|         [[0.886 0.114]
+|          [0.124 0.876]]
+| DONE ✅
 ```

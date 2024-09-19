@@ -18,7 +18,7 @@ def make_palette() -> dict:
         - 'text_lighter': A lighter shade of the text color.
         - 'background': The background color of the plots.
     """
-    dark_blue = '#043379'
+    dark_blue = '#023379'
     blue = '#3384fa'
     grey = '#c4c4c4'
     yellow = '#fed906'
@@ -29,10 +29,10 @@ def make_palette() -> dict:
         grey,
     ]
 
-    text_darker = '#043379'
-    text = '#043379'
-    text_lighter = '#043379'
-    lines = '#043379'
+    text_darker = '#023379'
+    text = '#023379'
+    text_lighter = '#023379'
+    lines = '#023379'
     background = '#fff6d9'
     return {
         'palette': palette,
@@ -65,7 +65,7 @@ def apply_styling(colors: dict = None):
 
     params = {
         'figure.figsize': (6, 4),
-        'figure.dpi': 100,
+        'figure.dpi': 150,
         'savefig.pad_inches': 0.3,
         'figure.facecolor': colors.get('background'),
         'axes.facecolor': colors.get('background'),

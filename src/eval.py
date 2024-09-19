@@ -21,6 +21,8 @@ TARGET_COLUMN = 'condition'
 def evaluate_test() -> None:
     """Evaluate the model on the test set."""
     # pylint: disable=too-many-locals
+    bprint('Evaluation on test set', level=1)
+
     # Load the data
     bprint('Loading data', level=2)
     df = pd.read_parquet(get_dataset_path('clean_items_test'))

@@ -14,7 +14,7 @@ if __name__ == '__main__':
     train_model(cv=5)
     train_model()
 
-    bprint('EVALUATION ON TEST 📊', level=1)
+    bprint('EVALUATION 📊', level=1)
     evaluate_test()
 
     bprint('DONE ✅', level=1)

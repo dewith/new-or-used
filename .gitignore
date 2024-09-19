@@ -1,3 +1,25 @@
+*.csv
+*.parquet
+
+# ignore all local configuration
+conf/local/**
+!conf/local/.gitkeep
+.telemetry
+
+# ignore potentially sensitive credentials files
+conf/**/*credentials*
+
+# ignore everything in the following folders
+data/**
+logs/**
+
+# except their sub-folders
+!data/**/
+!logs/**/
+
+# also keep all .gitkeep files
+!.gitkeep
+
 _docs/
 
 *.bak
@@ -148,15 +170,3 @@ metaflow_card_cache/*
 
 # ruff formatter
 .ruff_cache/
-
-# data files
-data/*
-
-# keep visualizations
-!data/06_viz
-data/06_viz/*
-!data/06_viz/*.png
-!data/06_viz/*.gif
-
-# keep directory structure
-!.gitkeep

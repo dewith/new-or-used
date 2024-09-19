@@ -16,11 +16,11 @@ _license = (here / 'LICENSE').read_text(encoding='utf-8')
 
 
 setup(
-    name='metaflow-template',
+    name='new-or-used',
     version='0.1.0',
-    description='Metaflow Template',
+    description='Item Condition Classification',
     long_description=_readme,
-    url='https://github.com/dewith/metaflow-template/',
+    url='https://github.com/dewith/new-or-used/',
     author='Dewith Miramón',
     author_email='dewithmiramon@gmail.com',
     license=_license,

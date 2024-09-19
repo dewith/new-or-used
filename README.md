@@ -41,10 +41,91 @@ You should save the raw file at `data/01_raw/MLA_100k_checked_v3.jsonlines`.
 Finally, we can run the flows in the Metaflow project.
 
 ```bash
-$ python src/flows/intermediate/flow.py run --subset 1
-$ python src/flows/primary/flow.py run --dev 1 --ratio 0.1
-$ python src/flows/modeling/flow.py run --knn_n 100
-$ python src/flows/deployment/flow.py run --sagemaker_deploy 1
+$ python -m src.main
+DATA PREPROCESSING 💽
+| Train-test splitting
+|     Reading data from data/01_raw/MLA_100k_checked_v3.jsonlines
+|         Dataset contains 100,000 items
+|         Train/test sets contain 90,000/10,000
+|     Writing train and test data
+|     Done
+| Preprocessing data sets
+|     Loading data
+|         Train set shape: (90000, 45)
+|         Test set shape: (10000, 45)
+|     Mapping target label to {'used': 0, 'new': 1}
+|         Proportion of each class: {1: 0.537, 0: 0.463}
+|     Fitting preprocessor
+|         Keeping 62 attributes
+|         Keeping 42 categories
+|     Transforming data
+|         Train set
+|             Processing dict columns
+|             Processing list columns
+|             Processing categorical columns
+|             Processing numerical columns
+|             Processing boolean columns
+|         Test set
+|             Processing dict columns
+|             Processing list columns
+|             Processing categorical columns
+|             Processing numerical columns
+|             Processing boolean columns
+|     Saving preprocessed data
+|     Writing preprocessor class with pickle
+|     Done
+ML MODELING 🤖
+| Training model with cv = 5
+|     Loading data
+|     Building preprocessors
+|     Building pipeline
+|     Performing cross-validation score
+|     Performing cross-validation predict:
+|         Cross-validation metrics:
+|             test_accuracy    0.8803 ± 0.0010
+|             test_precision   0.8992 ± 0.0030
+|             test_recall      0.8752 ± 0.0034
+|             test_f1_score    0.8871 ± 0.0010
+|         Classification report:
+|                           precision    recall  f1-score   support
+|
+|                        0       0.86      0.89      0.87     41648
+|                        1       0.90      0.87      0.89     48352
+|
+|                 accuracy                           0.88     90000
+|                macro avg       0.88      0.88      0.88     90000
+|             weighted avg       0.88      0.88      0.88     90000
+|         Confusion matrix:
+|             [[0.887 0.113]
+|              [0.126 0.874]]
+| Training model with all the data
+|     Loading data
+|     Building preprocessors
+|     Building pipeline
+|     Training the model
+|     Saving the model
+EVALUATION 📊
+|     Loading data
+|     Loading model
+|     Making predictions
+|     Metrics:
+|         accuracy     0.8801
+|         precision    0.9007
+|         recall       0.8746
+|         f1_score     0.8875
+|     Classification report:
+|                       precision    recall  f1-score   support
+|
+|                    0       0.86      0.89      0.87      4594
+|                    1       0.90      0.87      0.89      5406
+|
+|             accuracy                           0.88     10000
+|            macro avg       0.88      0.88      0.88     10000
+|         weighted avg       0.88      0.88      0.88     10000
+|     Confusion matrix:
+|         [[0.887 0.113]
+|          [0.125 0.875]]
+DONE 🎉
 ```
 
 ## Project overview

@@ -114,8 +114,9 @@ class Preprocessor:
         # Make it a string instead of a list
         df['sub_status'] = df['sub_status'].apply(lambda x: x[0] if x else np.nan)
 
-        # Drop this column since most of the values are empty
+        # Drop these column since most of the values are empty
         df.drop(columns=['deal_ids'], inplace=True)
+        df.drop(columns=['shipping_tags'], inplace=True)
 
         # Extract payment methods
         payment_df = df['non_mercado_pago_payment_methods'].apply(
@@ -153,6 +154,7 @@ class Preprocessor:
             if x
             else np.nan
         )
+        df.drop(columns=['pictures'], inplace=True)
 
         # Let's turn shipping_free_methods into a flag
         df.shipping_free_methods.value_counts(dropna=False)
@@ -475,8 +477,8 @@ def preprocess_dataset():
 
     # Save the preprocessed data
     bprint('Saving preprocessed data', level=2)
-    train_df.to_csv(clean_train_path, index=False)
-    test_df.to_csv(clean_test_path, index=False)
+    train_df.to_parquet(clean_train_path, index=False)
+    test_df.to_parquet(clean_test_path, index=False)
 
     # Save the preprocessor
     bprint('Writing preprocessor class with pickle', level=2)

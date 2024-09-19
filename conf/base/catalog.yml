@@ -19,12 +19,20 @@ raw_items_test:
 
 clean_items_train:
   layer: processed
-  path: items_train_clean.csv
+  path: items_train_clean.parquet
 
 clean_items_test:
   layer: processed
-  path: items_test_clean.csv
+  path: items_test_clean.parquet
 
 preprocessor:
   layer: models
   path: preprocessor.pkl
+
+model:
+  layer: models
+  path: model.pkl
+
+pred_test:
+  layer: outputs
+  path: pred_test.parquet

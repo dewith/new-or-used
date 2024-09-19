@@ -38,10 +38,15 @@ You should save the raw file at `data/01_raw/MLA_100k_checked_v3.jsonlines`.
 
 ### Execution
 
-Finally, we can run the flows in the Metaflow project.
+Finally, we can run the training-evaluation pipeline located on `src/main.py`.
 
 ```bash
 $ python -m src.main
+```
+
+You should see the following output:
+
+```bash
 DATA PREPROCESSING 💽
 | Train-test splitting
 |     Reading data from data/01_raw/MLA_100k_checked_v3.jsonlines

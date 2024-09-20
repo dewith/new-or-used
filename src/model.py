@@ -1,4 +1,5 @@
 """Script to make the machine learn."""
+# pylint: disable=duplicate-code
 
 import pandas as pd
 from joblib import dump

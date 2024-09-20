@@ -1,8 +1,8 @@
 <h1 align="center">Items Condition Prediction</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-In%20Progress-yellow" alt="Status"/>
-  <img src="https://img.shields.io/badge/Version-0.1-yellow" alt="Version"/>
+  <img src="https://img.shields.io/badge/Status-Completed-yellow" alt="Status"/>
+  <img src="https://img.shields.io/badge/Version-1.0-yellow" alt="Version"/>
   <img src="https://img.shields.io/badge/Python-3.12-yellow" alt="Python"/>
   <img src="https://img.shields.io/badge/License-Apache-yellow" alt="License"/>
 </p>
@@ -17,6 +17,49 @@ This algorithm will help improve the user experience while searching and shoppin
 
 The algorithm is needed now because the marketplace is growing and the number of items listed is increasing. This makes it difficult for users to find what they are looking for, and it is important to provide them with the best experience possible.
 
+## Metrics
+
+To evaluate use the standard **accuracy** because the dataset is almost balanced, and the classes are equally important.
+
+As a secondary metric, we will use the **precision**, which is the proportion of true positive predictions among all positive predictions.
+
+The rationale behind this choice is that we want to minimize the number of false positives, i.e., the number of items that are predicted as new but are actually used.
+
+## Results summary
+
+The results of the training-evaluation pipeline are summarized in the table below.
+
+| Model         | Features                  | Accuracy  | Precision |
+|---------------|---------------------------|-----------|-----------|
+| Naive Bayes   | Title text                | 80.3%     | 78.9%     |
+| Random Forest | Tabular data              | 85.7%     | 87.9%     |
+| XGBoost       | Title text + tabular data | **88.0%** | **90.0%** |
+
+The `XGBoost` model performed the best, with an accuracy of 88% and a precision of 90%. The model was able to predict the class of the items with a high accuracy and precision.
+
+This is the confusion matrix of the `XGBoost` model:
+
+![Confusion matrix](data/06_viz/confusion.png)
+
+
+### Feature importances
+
+The feature importances of the `XGBoost` model are shown in the plot below.
+
+![Feature importances](data/06_viz/importances.png)
+
+The most important features were the item's initial quantity, the seller's reputation/maturity, and the item's title. Besides that, the quality of the item's pictures and some attributes attached to the listing were also important.
+
+### Potential next iterations
+
+Here are some ideas to further improve the model:
+
+- Try to improve the models by tuning the hyperparameters and using a stacking method.
+- Use how many items a seller has sold in the past as a feature.
+- Use the item's description as a feature too, which is not present in the current data.
+- Compute a new feature to indicate how far away is the price from the average price of the same category (or even the same produt), which could be a good indicator of the item's condition.
+- Use better text preprocessing techniques, such as transformer-based embeddings or text classification using LLMs.
+
 ## Running instructions
 
 ### Environment
@@ -24,10 +67,10 @@ The algorithm is needed now because the marketplace is growing and the number of
 First, clone the repository and install all dependencies.
 
 ```bash
-$ git clone https://github.com/dewith/new-or-used.git
-$ make install
-$ make pre-commit
-$ source .env/bin/activate
+git clone https://github.com/dewith/new-or-used.git
+make install
+make pre-commit
+source .env/bin/activate
 ```
 
 ### Dataset
@@ -38,13 +81,13 @@ You should save the raw file at `data/01_raw/MLA_100k_checked_v3.jsonlines`.
 
 ### Execution
 
-Finally, we can run the training-evaluation pipeline located on `src/main.py`.
+Finally, you can run the training-evaluation pipeline located on `src/main.py`.
 
 ```bash
-$ python -m src.main
+python -m src.main
 ```
 
-You should see the following output:
+You should see the following output in the terminal:
 
 ```bash
 | DATA PREPROCESSING 💽

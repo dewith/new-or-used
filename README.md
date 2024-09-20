@@ -130,10 +130,10 @@ You should see the following output in the terminal:
 |     Performing cross-validation score
 |     Performing cross-validation predict:
 |         Cross-validation metrics:
-|             test_accuracy    0.8798 ± 0.0027
-|             test_precision   0.8991 ± 0.0030
-|             test_recall      0.8745 ± 0.0049
-|             test_f1_score    0.8866 ± 0.0027
+|             test_accuracy    0.8806 ± 0.0013
+|             test_precision   0.9012 ± 0.0025
+|             test_recall      0.8736 ± 0.0022
+|             test_f1_score    0.8872 ± 0.0011
 |         Classification report:
 |                           precision    recall  f1-score   support
 |
@@ -145,12 +145,17 @@ You should see the following output in the terminal:
 |             weighted avg       0.88      0.88      0.88     90000
 |         Confusion matrix:
 |             [[0.887 0.113]
-|              [0.126 0.874]]
+|              [0.127 0.873]]
 | Training model with all the data
 |     Loading data
 |     Building preprocessors
 |     Building pipeline
 |     Training the model
+|     Metrics on train:
+|         accuracy     0.8945
+|         precision    0.9116
+|         recall       0.8899
+|         f1_score     0.9006
 |     Saving the model
 | EVALUATION 📊
 | Evaluation on test set
@@ -158,21 +163,21 @@ You should see the following output in the terminal:
 |     Loading model
 |     Making predictions
 |     Metrics:
-|         accuracy     0.8807
-|         precision    0.9002
-|         recall       0.8764
-|         f1_score     0.8882
+|         accuracy     0.8804
+|         precision    0.8991
+|         recall       0.8772
+|         f1_score     0.8880
 |     Classification report:
 |                       precision    recall  f1-score   support
 |
-|                    0       0.86      0.89      0.87      4594
+|                    0       0.86      0.88      0.87      4594
 |                    1       0.90      0.88      0.89      5406
 |
 |             accuracy                           0.88     10000
 |            macro avg       0.88      0.88      0.88     10000
 |         weighted avg       0.88      0.88      0.88     10000
 |     Confusion matrix:
-|         [[0.886 0.114]
-|          [0.124 0.876]]
+|         [[0.884 0.116]
+|          [0.123 0.877]]
 | DONE ✅
 ```

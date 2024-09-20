@@ -148,16 +148,29 @@ def train_model(cv: int = 0) -> None:
             level=4,
         )
     else:
+        # Define the scoring metrics
+        scoring = {
+            'accuracy': accuracy_score,
+            'precision': precision_score,
+            'recall': recall_score,
+            'f1_score': f1_score,
+        }
+
         bprint('Training the model', level=2)
         pipeline.fit(x, y)
 
+        bprint('Metrics on train:', level=2)
+        y_pred = pipeline.predict(x)
+        for metric, scorer in scoring.items():
+            score = scorer(y, y_pred)
+            bprint(f'{metric:<12} {score:.4f}', level=3)
+
         bprint('Saving the model', level=2)
-        # joblib.dump(pipeline, get_dataset_path('model'))
         with open(get_dataset_path('model'), 'wb', encoding=None) as f:
             dump(pipeline, f, protocol=5)
 
 
 if __name__ == '__main__':
     bprint('ML MODELING 🤖', level=0)
-    # train_model(cv=5)
+    train_model(cv=5)
     train_model()
